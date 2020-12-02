@@ -7,7 +7,7 @@ import libDuo.model.Idioma;
 public interface IIdiomaDAO {
 	
 	//afegir un idioma a temari del usuari
-	public boolean afegirIdioma();
+	public Idioma setIdioma(Idioma idioma, String nomNouIdioma);
 	
 	public Idioma getIdiomaByName(String nomIdioma);
 	

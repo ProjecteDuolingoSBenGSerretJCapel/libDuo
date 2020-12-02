@@ -1,5 +1,6 @@
 package libDuo.implement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -43,6 +44,75 @@ public class CategoriaImpl implements ICategoriaDAO{
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public ArrayList<Categoria> getAllCategorias() {
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			
+			ArrayList<Categoria> list = (ArrayList<Categoria>) session.createCriteria(Categoria.class).list();
+			t.commit();
+			return list;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public Categoria getIdiomaByName(String nomCategoria) {
+		Categoria categoria = null;
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			ArrayList<Categoria> arrayListTotsElsIdiomes = getAllCategorias();
+			for (int i = 0; i < arrayListTotsElsIdiomes.size(); i++) {
+				if(arrayListTotsElsIdiomes.get(i).getTipusCategoria().equalsIgnoreCase(nomCategoria)) {
+					 categoria = arrayListTotsElsIdiomes.get(i);
+				}
+			}
+			t.commit();
+			return categoria;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean comprobarNovaCategoria(String nomNovaCategoria, ArrayList<Categoria> arrayList) {
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			for (int i = 0; i < arrayList.size(); i++) {
+				//recorra les categorias de la combinacio per veure si aquella categoria ja esta creada
+			}
+			return true;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public void setNovaCategoria(String nomNovaCategoria) {
+		Categoria categoria = new Categoria();
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			categoria.setTipusCategoria(nomNovaCategoria);
+			session.save(categoria);
+			t.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

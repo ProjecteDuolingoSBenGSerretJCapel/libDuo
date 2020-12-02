@@ -13,9 +13,20 @@ import libDuo.util.HibernateUtil;
 public class IdiomaImpl implements IIdiomaDAO{
 
 	@Override
-	public boolean afegirIdioma() {
-		// TODO Auto-generated method stub
-		return false;
+	public Idioma setIdioma(Idioma idioma, String nomNouIdioma) {
+		Idioma nouIdioma = idioma;
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			nouIdioma.setIdioma(nomNouIdioma);
+			session.save(nouIdioma);
+			t.commit();
+			return nouIdioma;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return nouIdioma;
+		}
 	}
 
 	@Override
@@ -35,7 +46,7 @@ public class IdiomaImpl implements IIdiomaDAO{
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			return idioma;
+			return null;
 		}
 	}
 
