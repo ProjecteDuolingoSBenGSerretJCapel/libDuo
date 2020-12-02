@@ -43,7 +43,7 @@ public class project_main {
 		c2.setIdiomaOrigen(i2);
 		c2.setIdiomaDesti(i3);
 		
-		c3.setIdiomaOrigen(i4);
+		c3.setIdiomaOrigen(i3);
 		c3.setIdiomaDesti(i1);
 		
 		Transaction t = null;
