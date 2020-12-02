@@ -83,11 +83,12 @@ public class CursImpl implements ICursDAO{
 	}
 
 	@Override
-	public boolean setIdiomaDesti(Idioma idiomaDesti, Curs curs) {
+	public boolean setNewCurs(Idioma idiomaOrigen, Idioma idiomaDesti, Curs curs) {
 		Transaction t = null;
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
 			t = session.beginTransaction();
-			curs.setIdiomaDesti(idiomaDesti);;
+			curs.setIdiomaOrigen(idiomaOrigen);
+			curs.setIdiomaDesti(idiomaDesti);
 			session.save(curs);
 			t.commit();
 			return true;
@@ -98,20 +99,6 @@ public class CursImpl implements ICursDAO{
 		}
 	}
 
-	@Override
-	public boolean setIdiomaOrigen(Idioma idiomaOrigen, Curs curs) {
-		Transaction t = null;
-		try(Session session = HibernateUtil.getSessionFactory().openSession()){
-			t = session.beginTransaction();
-			curs.setIdiomaDesti(idiomaOrigen);;
-			session.save(curs);
-			t.commit();
-			return true;
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+
 	
 }
