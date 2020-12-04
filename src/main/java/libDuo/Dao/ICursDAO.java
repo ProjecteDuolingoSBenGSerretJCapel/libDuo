@@ -19,6 +19,8 @@ public interface ICursDAO {
 	public Curs getCursByNom(String nomCurs);
 	
 	public boolean setNewCurs(Idioma idiomaOrigen, Idioma idiomaDesti,Curs curs);
+	
+	public Curs getCursByIds(long idIdiomaDesti, long idIdiomaOrigen);
 
 	
 }

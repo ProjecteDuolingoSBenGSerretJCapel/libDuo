@@ -99,6 +99,31 @@ public class CursImpl implements ICursDAO{
 		}
 	}
 
+	@Override
+	public Curs getCursByIds(long idIdiomaDesti, long idIdiomaOrigen) {
+		ICursDAO icmanager = new CursImpl();
+		ArrayList<Curs> arrayListCurs = icmanager.getAllCursos();
+		
+		Curs curs = null;
+		
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			for (int i = 0; i < arrayListCurs.size(); i++) {
+				if(arrayListCurs.get(i).getIdiomaOrigen().getIdIdioma() == idIdiomaDesti && 
+						arrayListCurs.get(i).getIdiomaDesti().getIdIdioma() == idIdiomaOrigen) {
+					curs = arrayListCurs.get(i);
+				}
+			}
+			t.commit();
+			return curs;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 	
 }

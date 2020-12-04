@@ -84,28 +84,17 @@ public class CategoriaImpl implements ICategoriaDAO{
 	}
 
 	@Override
-	public boolean comprobarNovaCategoria(String nomNovaCategoria, ArrayList<Categoria> arrayList) {
-		Transaction t = null;
-		try(Session session = HibernateUtil.getSessionFactory().openSession()){
-			t = session.beginTransaction();
-			for (int i = 0; i < arrayList.size(); i++) {
-				//recorra les categorias de la combinacio per veure si aquella categoria ja esta creada
-			}
-			return true;
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	@Override
-	public void setNovaCategoria(String nomNovaCategoria) {
+	public void setNovaCategoria(String nomNovaCategoria, Curs curs) {
 		Categoria categoria = new Categoria();
+		
+		ArrayList<Categoria> arrayListCategoria = new ArrayList<Categoria>();
 		Transaction t = null;
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
 			t = session.beginTransaction();
 			categoria.setTipusCategoria(nomNovaCategoria);
+			arrayListCategoria.add(categoria);
+			curs.setCategoria(arrayListCategoria);
+
 			session.save(categoria);
 			t.commit();
 			
@@ -113,6 +102,30 @@ public class CategoriaImpl implements ICategoriaDAO{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public List<Categoria> getAllCategoriesByCurs(Curs curs) {
+		ICategoriaDAO icmanager = new CategoriaImpl();
+		ArrayList<Categoria> arrayTotesCategories = icmanager.getAllCategorias();
+		
+		ArrayList<Categoria> arrayCategoriaCurs = new ArrayList<Categoria>();
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			for (int i = 0; i < arrayTotesCategories.size(); i++) {
+				if(arrayTotesCategories.get(i).getCurs() == curs) {
+					arrayCategoriaCurs.add(arrayTotesCategories.get(i));
+				}
+			}
+			
+			t.commit();
+			return arrayCategoriaCurs;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
