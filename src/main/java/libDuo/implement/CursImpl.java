@@ -10,6 +10,7 @@ import com.mysql.cj.x.protobuf.MysqlxCrud.Insert;
 
 
 import libDuo.Dao.*;
+import libDuo.model.Categoria;
 import libDuo.model.Curs;
 import libDuo.model.Idioma;
 import libDuo.util.HibernateUtil;
@@ -122,6 +123,30 @@ public class CursImpl implements ICursDAO{
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public Categoria setCategoriaCurs(long idCurs, Categoria categoria) {
+		Curs curs = getCursById(idCurs);
+		
+		ICategoriaDAO icmanager = new CategoriaImpl();
+		ArrayList<Categoria> arrayList = (ArrayList<Categoria>) icmanager.getAllCategoriesByCurs(curs);
+		
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			arrayList.add(categoria);
+			curs.setCategoria(arrayList);
+			session.save(curs);
+			t.commit();
+			
+			return categoria;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 

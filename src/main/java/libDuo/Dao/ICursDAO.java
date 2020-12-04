@@ -2,6 +2,7 @@ package libDuo.Dao;
 
 import java.util.ArrayList;
 
+import libDuo.model.Categoria;
 import libDuo.model.Curs;
 import libDuo.model.Idioma;
 
@@ -22,6 +23,6 @@ public interface ICursDAO {
 	
 	public Curs getCursByIds(long idIdiomaDesti, long idIdiomaOrigen);
 	
-
+	public Categoria setCategoriaCurs(long idCurs, Categoria categoira);
 	
 }

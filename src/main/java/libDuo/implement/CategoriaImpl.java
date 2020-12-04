@@ -84,7 +84,7 @@ public class CategoriaImpl implements ICategoriaDAO{
 	}
 
 	@Override
-	public void setNovaCategoria(String nomNovaCategoria, Curs curs) {
+	public Categoria setNovaCategoria(String nomNovaCategoria, Curs curs) {
 		Categoria categoria = new Categoria();
 		
 		ArrayList<Categoria> arrayListCategoria = new ArrayList<Categoria>();
@@ -95,13 +95,14 @@ public class CategoriaImpl implements ICategoriaDAO{
 			categoria.setTipusCategoria(nomNovaCategoria);
 			arrayListCategoria.add(categoria);
 			curs.setCategoria(arrayListCategoria);
-
-			session.save(categoria);
-			session.update(curs);
-			t.commit();
 			
+			session.save(categoria);		
+			t.commit();
+			return categoria;
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+			return null;
 		}
 		
 	}
@@ -176,5 +177,7 @@ public class CategoriaImpl implements ICategoriaDAO{
 			return null;
 		}
 	}
+
+
 
 }
