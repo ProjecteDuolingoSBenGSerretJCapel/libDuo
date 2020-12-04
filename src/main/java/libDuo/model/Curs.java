@@ -37,10 +37,7 @@ public class Curs {
 		this.categoria = categoria;
 	}
 
-	
 
-	
-	
 	public Idioma getIdiomaOrigen() {
 		return idiomaOrigen;
 	}

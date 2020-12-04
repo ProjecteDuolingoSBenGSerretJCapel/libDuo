@@ -91,11 +91,13 @@ public class CategoriaImpl implements ICategoriaDAO{
 		Transaction t = null;
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
 			t = session.beginTransaction();
+			
 			categoria.setTipusCategoria(nomNovaCategoria);
 			arrayListCategoria.add(categoria);
 			curs.setCategoria(arrayListCategoria);
 
 			session.save(categoria);
+			session.update(curs);
 			t.commit();
 			
 		}catch(Exception e) {
@@ -121,6 +123,53 @@ public class CategoriaImpl implements ICategoriaDAO{
 			
 			t.commit();
 			return arrayCategoriaCurs;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public ArrayList<Categoria> getAllCategoriesByIdiomaOrigen(Curs curs) {
+		ICategoriaDAO icmanager = new CategoriaImpl();
+		ArrayList<Categoria> arrayTotesCategories = icmanager.getAllCategorias();
+		
+		ArrayList<Categoria> arrayCategoriaCurs = new ArrayList<Categoria>();
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			for (int i = 0; i < arrayTotesCategories.size(); i++) {
+				if(arrayTotesCategories.get(i).getCurs().getIdiomaOrigen() == curs.getIdiomaDesti()) {
+					arrayCategoriaCurs.add(arrayTotesCategories.get(i));
+				}
+			}
+			
+			t.commit();
+			return arrayCategoriaCurs;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public Categoria getCategoriaByIdCurs(long idCurs) {
+		ICategoriaDAO icmanager = new CategoriaImpl();
+		ArrayList<Categoria> arrayListCategoria = icmanager.getAllCategorias();
+		
+		Categoria categoria = new Categoria();
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			for (int i = 0; i < arrayListCategoria.size(); i++) {
+				if(arrayListCategoria.get(i).getCurs().getIdCurs() == idCurs) {
+					categoria = arrayListCategoria.get(i);
+				}
+			}
+			t.commit();
+			return categoria;
 			
 		}catch(Exception e) {
 			e.printStackTrace();

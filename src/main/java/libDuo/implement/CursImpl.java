@@ -104,7 +104,7 @@ public class CursImpl implements ICursDAO{
 		ICursDAO icmanager = new CursImpl();
 		ArrayList<Curs> arrayListCurs = icmanager.getAllCursos();
 		
-		Curs curs = null;
+		Curs curs = new Curs();
 		
 		Transaction t = null;
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){

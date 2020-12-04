@@ -21,7 +21,10 @@ public interface ICategoriaDAO {
 	
 	public Categoria getIdiomaByName(String nomCategoria);
 
-	
 	public void setNovaCategoria(String nomNovaCategoria, Curs curs);
+	
+	public ArrayList<Categoria> getAllCategoriesByIdiomaOrigen(Curs curs);
+	
+	public Categoria getCategoriaByIdCurs(long idCurs);
 
 }

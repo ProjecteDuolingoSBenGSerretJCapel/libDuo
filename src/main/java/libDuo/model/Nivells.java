@@ -13,8 +13,11 @@ public class Nivells {
 	@Column(name = "idNivell")
 	private long idNivell;
 	
-	@Column(name = "nivell")
+	@Column(name = "NumNivell")
 	private int nivell;
+
+	@Column(name = "nomNivell")
+	private String nomNivell;
 	
 	@ManyToOne()
 	private Categoria categoria;
@@ -65,6 +68,15 @@ public class Nivells {
 	//set num nivell
 	public void setNivell(int nivell) {
 		this.nivell = nivell;
+	}
+	
+	
+	public String getNomNivell() {
+		return nomNivell;
+	}
+
+	public void setNomNivell(String nomNivell) {
+		this.nomNivell = nomNivell;
 	}
 
 }
