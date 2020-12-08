@@ -85,7 +85,7 @@ public class ExerciciImpl implements IExercici{
 		}
 		else if(datos.isJsonPrimitive()) {
 			// Es un elemento simple. Determinar si se trata de un valor booleano,
-	        // un número o cadena de texto
+	        // un nï¿½mero o cadena de texto
 			
 			//System.out.println("Es primitiva");
 			
@@ -110,22 +110,15 @@ public class ExerciciImpl implements IExercici{
 	}
 
 	@Override
-	public Exercici setNouTipus(File file, ArrayList<Exercici> arrayExercicis, String exercici, String enunciat, String resposta1, String resposta2,
+	public Exercici setNouTipus(ArrayList<Exercici> arrayExercicis, String exercici, String enunciat, String resposta1, String resposta2,
 			String resposta3, String respostaCorrecte) {
-		
-		String ruta = "recursos/tipus.json";
-		file = llegirFicherJson(ruta);
-		
-		if(file != null) {
-			Exercici ex = new Exercici(exercici, enunciat, resposta1, resposta2, resposta3, respostaCorrecte);
+
+		Exercici ex = new Exercici(exercici, enunciat, resposta1, resposta2, resposta3, respostaCorrecte);
 			
-			arrayExercicis.add(ex);
+		arrayExercicis.add(ex);
 			
-			return ex;
-		}
-		else {
-			return null;
-		}
+		return ex;
+
 	}
 
 	@Override

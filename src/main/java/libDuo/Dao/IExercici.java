@@ -10,7 +10,7 @@ import libDuo.model.Exercici;
 
 public interface IExercici {
 	
-	public Exercici setNouTipus(File file,ArrayList<Exercici> arrayExercicis, String exercici, String enunciat, String resposta1, String resposta2, String resposta3, String respostaCorrecte);
+	public Exercici setNouTipus(ArrayList<Exercici> arrayExercicis, String exercici, String enunciat, String resposta1, String resposta2, String resposta3, String respostaCorrecte);
 	
 	public File llegirFicherJson(String ruta);
 	
