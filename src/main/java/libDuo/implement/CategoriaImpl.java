@@ -95,6 +95,7 @@ public class CategoriaImpl implements ICategoriaDAO{
 			categoria.setTipusCategoria(nomNovaCategoria);
 			arrayListCategoria.add(categoria);
 			curs.setCategoria(arrayListCategoria);
+			categoria.setCurs(curs);
 			
 			session.save(categoria);		
 			t.commit();
