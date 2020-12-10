@@ -15,7 +15,7 @@ import libDuo.util.HibernateUtil;
 public class project_main {
 	
 	public static void main(String[] args) {
-		/*
+		
 		ITextIdiomes icmanagerTextIdiomes = new TextIdiomasImpl();
 		ArrayList<String> idiomes = icmanagerTextIdiomes.leerFicheroDeIdiomes();
 		icmanagerTextIdiomes.setAllIdiomes(idiomes);
@@ -40,7 +40,7 @@ public class project_main {
 					
 					
 				}
-		*/
+		
 	}
 
 }

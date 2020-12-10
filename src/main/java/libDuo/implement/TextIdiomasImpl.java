@@ -1,6 +1,7 @@
 package libDuo.implement;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class TextIdiomasImpl implements ITextIdiomes{
 		String texto="";
 		ArrayList<String> idiomesText = new ArrayList<String>();
 		try{
-			FileReader lector=new FileReader("/home/super/Escriptori/project_duolingo/desktopDuo/recursos/languageList.txt");
+			FileReader lector=new FileReader("recursos"+File.separator+"languageList.txt");
 	
 			BufferedReader contenido=new BufferedReader(lector);
 	
