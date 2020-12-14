@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import libDuo.Dao.ICategoriaDAO;
 import libDuo.Dao.INivellsDAO;
 import libDuo.model.*;
 import libDuo.util.HibernateUtil;
@@ -60,6 +61,7 @@ public class NivellsImpl implements INivellsDAO{
 			arrayListNivells.add(nivell);
 			
 			categoria.setNivells(arrayListNivells);
+			nivell.setCategoria(categoria);
 			session.save(nivell);
 			session.update(categoria);
 			t.commit();
@@ -82,6 +84,31 @@ public class NivellsImpl implements INivellsDAO{
 			t.commit();
 			
 			return categoria;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	@Override
+	public List<Nivells> getAllNivellsByCategoria(Categoria categoria) {
+		INivellsDAO icmanager = new NivellsImpl();
+		ArrayList<Nivells> arrayTotsNivells = (ArrayList<Nivells>) icmanager.getAllNivells();
+		
+		ArrayList<Nivells> arrayNivellCategoria = new ArrayList<Nivells>();
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			for (int i = 0; i < arrayTotsNivells.size(); i++) {
+				if(arrayTotsNivells.get(i).getCategoria().getIdCategoria() == categoria.getIdCategoria()) {
+					arrayNivellCategoria.add(arrayTotsNivells.get(i));
+				}
+			}
+			
+			t.commit();
+			return arrayNivellCategoria;
 			
 		}catch(Exception e) {
 			e.printStackTrace();

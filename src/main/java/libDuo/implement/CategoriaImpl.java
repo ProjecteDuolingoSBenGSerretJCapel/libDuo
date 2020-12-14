@@ -63,7 +63,7 @@ public class CategoriaImpl implements ICategoriaDAO{
 	}
 
 	@Override
-	public Categoria getIdiomaByName(String nomCategoria) {
+	public Categoria getCategoriaByName(String nomCategoria) {
 		Categoria categoria = null;
 		Transaction t = null;
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
