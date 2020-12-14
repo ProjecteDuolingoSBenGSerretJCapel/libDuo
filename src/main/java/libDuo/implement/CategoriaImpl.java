@@ -118,7 +118,7 @@ public class CategoriaImpl implements ICategoriaDAO{
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
 			t = session.beginTransaction();
 			for (int i = 0; i < arrayTotesCategories.size(); i++) {
-				if(arrayTotesCategories.get(i).getCurs() == curs) {
+				if(arrayTotesCategories.get(i).getCurs().getIdCurs() == curs.getIdCurs()) {
 					arrayCategoriaCurs.add(arrayTotesCategories.get(i));
 				}
 			}
