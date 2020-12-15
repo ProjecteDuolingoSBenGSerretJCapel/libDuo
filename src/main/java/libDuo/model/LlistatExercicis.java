@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class LlistatExercicis {
 	
-	private ArrayList<Exercici> exercicis;
+	private ArrayList<ExerciciTest> exercicis;
 	
-	public LlistatExercicis(ArrayList<Exercici> exercicis) {
+	public LlistatExercicis(ArrayList<ExerciciTest> exercicis) {
 		this.exercicis = exercicis;
 	}
 

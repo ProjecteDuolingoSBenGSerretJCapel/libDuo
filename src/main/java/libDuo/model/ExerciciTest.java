@@ -4,7 +4,7 @@ package libDuo.model;
 
 import java.util.ArrayList;
 
-public class Exercici {
+public class ExerciciTest {
 	
 	private String tipusExercici;
 	private String enunciat;
@@ -15,7 +15,7 @@ public class Exercici {
 	
 	ArrayList respostesPossibles = new ArrayList();
 	
-	public Exercici(String exercici, String enunciat, String resposta1, String resposta2, String resposta3, String respostaCorrecta) {
+	public ExerciciTest(String exercici, String enunciat, String resposta1, String resposta2, String resposta3, String respostaCorrecta) {
 		this.tipusExercici = exercici;
 		this.enunciat = enunciat;
 		

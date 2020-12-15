@@ -15,12 +15,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
-import libDuo.Dao.IExercici;
-
-import libDuo.model.Exercici;
+import libDuo.Dao.IExerciciTest;
+import libDuo.model.ExerciciTest;
 import libDuo.model.LlistatExercicis;
 
-public class ExerciciImpl implements IExercici{
+public class ExerciciTestImpl implements IExerciciTest{
 
 	@Override
 	public File llegirFicherJson(String ruta) {
@@ -110,10 +109,9 @@ public class ExerciciImpl implements IExercici{
 	}
 
 	@Override
-	public Exercici setNouTipus(ArrayList<Exercici> arrayExercicis, String exercici, String enunciat, String resposta1, String resposta2,
+	public ExerciciTest setNouTipus(ArrayList<ExerciciTest> arrayExercicis, String exercici, String enunciat, String resposta1, String resposta2,
 			String resposta3, String respostaCorrecte) {
-
-		Exercici ex = new Exercici(exercici, enunciat, resposta1, resposta2, resposta3, respostaCorrecte);
+		ExerciciTest ex = new ExerciciTest(exercici, enunciat, resposta1, resposta2, resposta3, respostaCorrecte);
 			
 		arrayExercicis.add(ex);
 			
@@ -122,13 +120,14 @@ public class ExerciciImpl implements IExercici{
 	}
 
 	@Override
-	public String getJsonString(File file, ArrayList<Exercici> arrayExerici) {
+	public String getJsonString(File file, ArrayList<ExerciciTest> arrayExerici) {
 		Gson gson = new Gson();
 		LlistatExercicis exercicis = new LlistatExercicis(arrayExerici);
 		String jsonString2 = gson.toJson(exercicis);
 		
 		return jsonString2;
 	}
-		
+
+	
 
 }

@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 import com.google.gson.JsonElement;
 
-import libDuo.model.Exercici;
+import libDuo.model.ExerciciTest;
 
-public interface IExercici {
+public interface IExerciciTest {
 	
-	public Exercici setNouTipus(ArrayList<Exercici> arrayExercicis, String exercici, String enunciat, String resposta1, String resposta2, String resposta3, String respostaCorrecte);
+	public ExerciciTest setNouTipus(ArrayList<ExerciciTest> arrayExercicis, String exercici, String enunciat, String resposta1, String resposta2, String resposta3, String respostaCorrecte);
 	
 	public File llegirFicherJson(String ruta);
 	
@@ -20,6 +20,6 @@ public interface IExercici {
 	
 	public void dumpJsonElement(JsonElement datos);
 	
-	public String getJsonString(File file, ArrayList<Exercici> arrayExerici);
+	public String getJsonString(File file, ArrayList<ExerciciTest> arrayExerici);
 
 }
