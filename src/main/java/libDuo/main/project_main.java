@@ -2,12 +2,11 @@ package libDuo.main;
 
 import java.util.ArrayList;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
+
 
 import libDuo.Dao.ITextIdiomes;
 import libDuo.implement.TextIdiomasImpl;
-import libDuo.model.*;
 import libDuo.util.HibernateUtil;
 
 
@@ -15,7 +14,7 @@ import libDuo.util.HibernateUtil;
 public class project_main {
 	
 	public static void main(String[] args) {
-		/*
+		
 		ITextIdiomes icmanagerTextIdiomes = new TextIdiomasImpl();
 		ArrayList<String> idiomes = icmanagerTextIdiomes.leerFicheroDeIdiomes();
 		icmanagerTextIdiomes.setAllIdiomes(idiomes);
@@ -40,7 +39,7 @@ public class project_main {
 					
 					
 				}
-		*/
+		
 	}
 
 }
