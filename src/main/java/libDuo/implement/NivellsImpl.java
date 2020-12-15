@@ -75,24 +75,6 @@ public class NivellsImpl implements INivellsDAO{
 	}
 
 	@Override
-	public Categoria getCategoriaByIdCategoria(long idCategoria) {
-		Transaction t = null;
-		try(Session session = HibernateUtil.getSessionFactory().openSession()){
-			t = session.beginTransaction();
-			
-			Categoria categoria = session.find(Categoria.class, idCategoria);
-			t.commit();
-			
-			return categoria;
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
-	@Override
 	public List<Nivells> getAllNivellsByCategoria(Categoria categoria) {
 		INivellsDAO icmanager = new NivellsImpl();
 		ArrayList<Nivells> arrayTotsNivells = (ArrayList<Nivells>) icmanager.getAllNivells();
@@ -109,6 +91,27 @@ public class NivellsImpl implements INivellsDAO{
 			
 			t.commit();
 			return arrayNivellCategoria;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	public Nivells getNivellByName(String nomNivell) {
+		Nivells nivell = null;
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			ArrayList<Nivells> arrayListTotsElsNivells = (ArrayList<Nivells>) getAllNivells();
+			for (int i = 0; i < arrayListTotsElsNivells.size(); i++) {
+				if(arrayListTotsElsNivells.get(i).getNomNivell().equalsIgnoreCase(nomNivell)) {
+					 nivell = arrayListTotsElsNivells.get(i);
+				}
+			}
+			t.commit();
+			return nivell;
 			
 		}catch(Exception e) {
 			e.printStackTrace();

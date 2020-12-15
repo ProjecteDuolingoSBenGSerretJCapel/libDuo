@@ -15,7 +15,7 @@ public interface INivellsDAO {
 	
 	public Nivells setNouNivell(String nomNouNivell, int numNivell, Categoria categoria);
 	
-	public Categoria getCategoriaByIdCategoria(long idCategoria);
-	
 	public List<Nivells>  getAllNivellsByCategoria(Categoria categoria );
+	
+	public Nivells getNivellByName(String nomNivell);
 }
