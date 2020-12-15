@@ -13,6 +13,9 @@ public class Curs {
 	@Column(name = "idCurs")
 	private long idCurs;
 	
+	@Column(name = "nomCurs")
+	private String nomCurs;
+	
 	@ManyToOne()
 	private Idioma idiomaOrigen;
 	
@@ -75,6 +78,15 @@ public class Curs {
 	public void setIdCurs(long idCurs) {
 		this.idCurs = idCurs;
 	}
+	
+	public String getNomCurs() {
+		return nomCurs;
+	}
+
+	public void setNomCurs(String nomCurs) {
+		this.nomCurs = nomCurs;
+	}
+
 	
 	
 	

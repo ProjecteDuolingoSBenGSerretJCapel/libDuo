@@ -69,11 +69,16 @@ public class CursImpl implements ICursDAO{
 
 	@Override
 	public Curs getCursByNom(String nomCurs) {
+		Curs curs= null;
 		Transaction t = null;
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
 			t = session.beginTransaction();
-			
-			Curs curs = session.find(Curs.class, nomCurs);
+			ArrayList<Curs> arrayListTotsElsCursos = getAllCursos();
+			for (int i = 0; i < arrayListTotsElsCursos.size(); i++) {
+				if(arrayListTotsElsCursos.get(i).getNomCurs().equalsIgnoreCase(nomCurs)) {
+					 curs = arrayListTotsElsCursos.get(i);
+				}
+			}
 			t.commit();
 			return curs;
 			
@@ -90,6 +95,7 @@ public class CursImpl implements ICursDAO{
 			t = session.beginTransaction();
 			curs.setIdiomaOrigen(idiomaOrigen);
 			curs.setIdiomaDesti(idiomaDesti);
+			curs.setNomCurs(idiomaOrigen.getIdioma()+" - "+idiomaDesti.getIdioma());
 			session.save(curs);
 			t.commit();
 			return true;
