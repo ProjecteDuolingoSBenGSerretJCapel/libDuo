@@ -116,4 +116,23 @@ public class ExercicisImpl implements IExercicisDAO{
 		
 	}
 
+	@Override
+	public String getDadesEx(Exercicis exercici) {
+		String stringJSon = new String();
+		
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			
+			stringJSon = exercici.getFitxerDades();
+			t.commit();
+			
+			return stringJSon;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

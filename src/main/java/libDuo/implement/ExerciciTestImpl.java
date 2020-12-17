@@ -22,7 +22,9 @@ import libDuo.model.LlistatExercicisTest;
 
 public class ExerciciTestImpl implements IExerciciTest{
 
-	@Override
+	private ArrayList<String> json = new ArrayList<String>();
+	
+	@Override 
 	public File llegirFicherJson(String ruta) {
 		File file = new File(ruta);
 		if(file.exists()) {
@@ -50,11 +52,12 @@ public class ExerciciTestImpl implements IExerciciTest{
 		JsonParser parse = new JsonParser();
 		FileReader fr = new FileReader(file);
 		JsonElement datos = parse.parse(fr);
-		dumpJsonElement(datos);
+		
+		dumpJsonElement(datos, json);
 	}
 
 	@Override
-	public void dumpJsonElement(JsonElement datos) {
+	public void dumpJsonElement(JsonElement datos, ArrayList<String> json) {
 		if(datos.isJsonObject()) {
 			// Es un conjunto de pares clave, valor
 	        // Para cada par, imprimir la clave y llamar a dumpJSONElement(valor)
@@ -67,7 +70,7 @@ public class ExerciciTestImpl implements IExerciciTest{
 			while(iter.hasNext()) {
 				java.util.Map.Entry<String,JsonElement> entrada = iter.next();
 				System.out.println("'" + entrada.getKey() + "' : ");
-				dumpJsonElement(entrada.getValue());
+				dumpJsonElement(entrada.getValue(), json);
 			}
 		}
 		else if(datos.isJsonArray()) {
@@ -79,7 +82,7 @@ public class ExerciciTestImpl implements IExerciciTest{
 			java.util.Iterator<JsonElement> iter = array.iterator();
 			while(iter.hasNext()) {
 				JsonElement entrada = iter.next();
-				dumpJsonElement(entrada);
+				dumpJsonElement(entrada, json);
 			}
 			System.out.println("]");
 		}
@@ -98,6 +101,7 @@ public class ExerciciTestImpl implements IExerciciTest{
 			}
 			else if(valor.isString()) {
 				System.out.println(valor.getAsString());
+				json.add(valor.getAsString());
 			}
 		}
 		else if(datos.isJsonNull()) {
@@ -127,6 +131,12 @@ public class ExerciciTestImpl implements IExerciciTest{
 		String jsonString2 = gson.toJson(exercicis);
 		
 		return jsonString2;
+	}
+
+	@Override
+	public ArrayList<String> getArrayList() {
+		// TODO Auto-generated method stub
+		return this.json;
 	}
 
 	

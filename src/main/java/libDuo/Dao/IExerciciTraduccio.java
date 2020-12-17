@@ -13,7 +13,7 @@ public interface IExerciciTraduccio {
 
 	
 
-	void dumpJsonElement(JsonElement datos);
+	void dumpJsonElement(JsonElement datos,ArrayList<String> jsonArrayList);
 
 	void llegirJson(File file) throws FileNotFoundException;
 
@@ -25,5 +25,6 @@ public interface IExerciciTraduccio {
 			ArrayList<String> respostesCorrectes);
 
 	String getJsonString(File file, ArrayList<ExerciciTraduccio> arrayExerici);
-
+	
+	public ArrayList<String> getArrayList(); 
 }

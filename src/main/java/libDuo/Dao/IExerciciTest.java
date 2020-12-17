@@ -18,8 +18,10 @@ public interface IExerciciTest {
 	
 	public void llegirJson(File file) throws FileNotFoundException;
 	
-	public void dumpJsonElement(JsonElement datos);
+	public void dumpJsonElement(JsonElement datos, ArrayList<String> json);
 	
 	public String getJsonString(File file, ArrayList<ExerciciTest> arrayExerici);
+	
+	public ArrayList<String> getArrayList();
 
 }

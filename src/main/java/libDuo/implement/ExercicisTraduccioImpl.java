@@ -23,6 +23,8 @@ import libDuo.model.LlistatExercicisTraduccio;
 
 public class ExercicisTraduccioImpl implements IExerciciTraduccio{
 	
+	private ArrayList<String> json = new ArrayList<String>();
+	
 	@Override
 	public File llegirFicherJson(String ruta) {
 		File file = new File(ruta);
@@ -53,12 +55,14 @@ public class ExercicisTraduccioImpl implements IExerciciTraduccio{
 		JsonParser parse = new JsonParser();
 		FileReader fr = new FileReader(file);
 		JsonElement datos = parse.parse(fr);
-		dumpJsonElement(datos);
+	
+		dumpJsonElement(datos, json);
+
 	}
 
 	
 	@Override
-	public void dumpJsonElement(JsonElement datos) {
+	public void dumpJsonElement(JsonElement datos, ArrayList<String>  jsonArrayList) {
 		if(datos.isJsonObject()) {
 			// Es un conjunto de pares clave, valor
 	        // Para cada par, imprimir la clave y llamar a dumpJSONElement(valor)
@@ -71,7 +75,7 @@ public class ExercicisTraduccioImpl implements IExerciciTraduccio{
 			while(iter.hasNext()) {
 				java.util.Map.Entry<String,JsonElement> entrada = iter.next();
 				System.out.println("'" + entrada.getKey() + "' : ");
-				dumpJsonElement(entrada.getValue());
+				dumpJsonElement(entrada.getValue(), jsonArrayList);
 			}
 		}
 		else if(datos.isJsonArray()) {
@@ -83,7 +87,7 @@ public class ExercicisTraduccioImpl implements IExerciciTraduccio{
 			java.util.Iterator<JsonElement> iter = array.iterator();
 			while(iter.hasNext()) {
 				JsonElement entrada = iter.next();
-				dumpJsonElement(entrada);
+				dumpJsonElement(entrada, jsonArrayList);
 			}
 			System.out.println("]");
 		}
@@ -102,6 +106,7 @@ public class ExercicisTraduccioImpl implements IExerciciTraduccio{
 			}
 			else if(valor.isString()) {
 				System.out.println(valor.getAsString());
+				jsonArrayList.add(valor.getAsString());
 			}
 		}
 		else if(datos.isJsonNull()) {
@@ -133,5 +138,9 @@ public class ExercicisTraduccioImpl implements IExerciciTraduccio{
 		return jsonString2;
 	}
 	
-	
+	@Override
+	public ArrayList<String> getArrayList(){
+		return this.json;
+	}
+		
 }
