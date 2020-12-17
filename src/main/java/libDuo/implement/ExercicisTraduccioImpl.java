@@ -15,13 +15,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
-import libDuo.Dao.IExerciciTest;
+import libDuo.Dao.IExerciciTraduccio;
 import libDuo.model.ExerciciTest;
+import libDuo.model.ExerciciTraduccio;
 
-import libDuo.model.LlistatExercicisTest;
+import libDuo.model.LlistatExercicisTraduccio;
 
-public class ExerciciTestImpl implements IExerciciTest{
-
+public class ExercicisTraduccioImpl implements IExerciciTraduccio{
+	
 	@Override
 	public File llegirFicherJson(String ruta) {
 		File file = new File(ruta);
@@ -33,6 +34,7 @@ public class ExerciciTestImpl implements IExerciciTest{
 		}	
 	}
 
+	
 	@Override
 	public void escriureFicherJson(File file, String jsonString) {
 		try {
@@ -45,6 +47,7 @@ public class ExerciciTestImpl implements IExerciciTest{
 		}
 	}
 
+
 	@Override
 	public void llegirJson(File file) throws FileNotFoundException {
 		JsonParser parse = new JsonParser();
@@ -53,6 +56,7 @@ public class ExerciciTestImpl implements IExerciciTest{
 		dumpJsonElement(datos);
 	}
 
+	
 	@Override
 	public void dumpJsonElement(JsonElement datos) {
 		if(datos.isJsonObject()) {
@@ -108,27 +112,26 @@ public class ExerciciTestImpl implements IExerciciTest{
 		}
 		
 	}
-
+	
+	
 	@Override
-	public ExerciciTest setNouTipus(ArrayList<ExerciciTest> arrayExercicis, String exercici, String enunciat, String resposta1, String resposta2,
-			String resposta3, String respostaCorrecte) {
-		ExerciciTest ex = new ExerciciTest(exercici, enunciat, resposta1, resposta2, resposta3, respostaCorrecte);
-			
+	public ExerciciTraduccio setNouTipus(ArrayList<ExerciciTraduccio> arrayExercicis,String tipusExercici, String fraseOrigen, ArrayList<String> respostesCorrectes) {
+		
+		ExerciciTraduccio ex = new ExerciciTraduccio(tipusExercici, fraseOrigen, respostesCorrectes);
 		arrayExercicis.add(ex);
-			
 		return ex;
-
+		
 	}
-
+	
+	
 	@Override
-	public String getJsonString(File file, ArrayList<ExerciciTest> arrayExerici) {
+	public String getJsonString(File file, ArrayList<ExerciciTraduccio> arrayExerici) {
 		Gson gson = new Gson();
-		LlistatExercicisTest exercicis = new LlistatExercicisTest(arrayExerici);
+		LlistatExercicisTraduccio exercicis = new LlistatExercicisTraduccio(arrayExerici);
 		String jsonString2 = gson.toJson(exercicis);
 		
 		return jsonString2;
 	}
-
 	
-
+	
 }

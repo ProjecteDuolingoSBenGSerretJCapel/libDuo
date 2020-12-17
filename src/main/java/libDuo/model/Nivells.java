@@ -1,5 +1,6 @@
 package libDuo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -78,5 +79,7 @@ public class Nivells {
 	public void setNomNivell(String nomNivell) {
 		this.nomNivell = nomNivell;
 	}
+
+	
 
 }

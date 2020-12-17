@@ -1,5 +1,7 @@
 package libDuo.implement;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -58,6 +60,34 @@ public class ExercicisImpl implements IExercicisDAO{
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	@Override
+	public Exercicis setNouExercici( Nivells nivell , String fitxerExercici) {
+		
+		Exercicis exercici = new Exercicis();
+		
+		ArrayList <Exercicis> arrayListExercicis= new ArrayList<Exercicis>();
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			exercici.setNivell(nivell);
+			exercici.setFitxerDades(fitxerExercici);
+			arrayListExercicis.add(exercici);
+			nivell.setExercicis(arrayListExercicis);
+			session.save(exercici);
+			session.update(nivell);
+			t.commit();
+			return exercici;
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+		
 	}
 
 }

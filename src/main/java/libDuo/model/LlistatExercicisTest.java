@@ -2,12 +2,15 @@ package libDuo.model;
 
 import java.util.ArrayList;
 
-public class LlistatExercicis {
+public class LlistatExercicisTest {
 	
 	private ArrayList<ExerciciTest> exercicis;
 	
-	public LlistatExercicis(ArrayList<ExerciciTest> exercicis) {
+	
+	public LlistatExercicisTest(ArrayList<ExerciciTest> exercicis) {
 		this.exercicis = exercicis;
 	}
+	
+	
 
 }

@@ -1,5 +1,7 @@
 package libDuo.model;
 
+
+
 import javax.persistence.*;
 
 @Entity
@@ -26,9 +28,24 @@ public class Exercicis {
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "exercicis")
 	private TipusExercici tipusExercici;
 	
-	public Exercicis(int ultimExercici, int cantitatExercicis) {
+	@Column( name = "dadesEx")
+	private String fitxerDades;
+	
+	public String getFitxerDades() {
+		return fitxerDades;
+	}
+
+	public void setFitxerDades(String fitxerExercici) {
+		this.fitxerDades = fitxerExercici;
+	}
+
+	public Exercicis(int ultimExercici, int cantitatExercicis,  String fitxerDades) {
 		this.utlimExercici = ultimExercici;
 		this.cantitatExercici = cantitatExercicis;
+		this.fitxerDades = fitxerDades;
+	}
+	public Exercicis() {
+		
 	}
 	
 	public ExercicisResolts getExercicisresolts() {
