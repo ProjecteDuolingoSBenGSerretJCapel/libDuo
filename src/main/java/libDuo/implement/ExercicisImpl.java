@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import libDuo.Dao.ICategoriaDAO;
 import libDuo.Dao.IExercicisDAO;
 import libDuo.model.*;
 import libDuo.util.HibernateUtil;
@@ -87,6 +88,31 @@ public class ExercicisImpl implements IExercicisDAO{
 		}
 		
 		
+		
+	}
+	
+	@Override
+	public List<Exercicis> getAllExercicisByNivell(Nivells nivell) {
+		IExercicisDAO icmanager = new ExercicisImpl();
+		ArrayList<Exercicis> arrayTotsExercicis = (ArrayList<Exercicis>) icmanager.getAllExercicis();
+		
+		ArrayList<Exercicis> arrayExercicisNivell = new ArrayList<Exercicis>();
+		Transaction t = null;
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			t = session.beginTransaction();
+			for (int i = 0; i < arrayTotsExercicis.size(); i++) {
+				if(arrayTotsExercicis.get(i).getNivell().getIdNivell() == nivell.getIdNivell()) {
+					arrayExercicisNivell.add(arrayTotsExercicis.get(i));
+				}
+			}
+			
+			t.commit();
+			return arrayExercicisNivell;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
 

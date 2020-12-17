@@ -18,4 +18,6 @@ public interface IExercicisDAO {
 	public Exercicis getExerciciById(long idExercici);
 
 	Exercicis setNouExercici(Nivells nivell, String jsonString);
+
+	List<Exercicis> getAllExercicisByNivell(Nivells nivell);
 }
